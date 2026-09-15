@@ -1,5 +1,4 @@
 version: 2.1
-
 jobs:
   build1:  &build_template
     parallelism: 10
